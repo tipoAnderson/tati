@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tati Studio — Студия красоты в Минске</title>
+    <meta name="description" content="Студия красоты Tati Studio в Минске. Стрижки, окрашивание, укладки, маникюр и педикюр. Запись онлайн через Dikidi." />
+    
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    
+    <!-- Шрифты Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💇‍♀️</text></svg>" />
+</head>
+<body>
+
+    <!-- ===== ХЕДЕР / НАВИГАЦИЯ ===== -->
+    <header class="header" id="header">
+        <div class="container header__container">
+            <a href="#" class="logo">Tati<span>Studio</span></a>
+            
+            <nav class="nav" id="nav">
+                <ul class="nav__list">
+                    <li><a href="#services" class="nav__link">Услуги</a></li>
+                    <li><a href="#masters" class="nav__link">Мастера</a></li>
+                    <li><a href="#reviews" class="nav__link">Отзывы</a></li>
+                    <li><a href="#contacts" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <button class="btn btn--primary header__btn" id="bookingBtn">Записаться</button>
+            
+            <!-- Кнопка бургер-меню -->
+            <button class="burger" id="burger" aria-label="Открыть меню">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== ГЛАВНЫЙ ЭКРАН (HERO) ===== -->
+    <section class="hero" id="hero">
+        <div class="container hero__container">
+            <div class="hero__content">
+                <span class="hero__badge">✧ Студия красоты в Минске</span>
+                <h1 class="hero__title">
+                    Твой идеальный <br />
+                    <span class="hero__title--highlight">образ</span> начинается здесь
+                </h1>
+                <p class="hero__text">
+                    Tati Studio — это пространство, где профессионализм встречается с индивидуальным подходом. Стрижки, окрашивание, укладки, маникюр и педикюр.
+                </p>
+                <div class="hero__actions">
+                    <button class="btn btn--primary btn--large" id="heroBookingBtn">Записаться онлайн</button>
+                    <a href="#services" class="btn btn--outline btn--large">Наши услуги</a>
+                </div>
+                <div class="hero__stats">
+                    <div class="stat">
+                        <span class="stat__number">5+</span>
+                        <span class="stat__label">лет опыта</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">1500+</span>
+                        <span class="stat__label">довольных клиентов</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">4.9</span>
+                        <span class="stat__label">средний рейтинг</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__image">
+                <!-- Замените src на свою картинку -->
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Студия красоты Tati Studio" />
+                <div class="hero__image-badge">
+                    <span>📸</span> Работы наших мастеров
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== УСЛУГИ ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-header__subtitle">Что мы предлагаем</span>
+                <h2 class="section-header__title">Наши услуги</h2>
+                <p class="section-header__text">Профессиональные услуги от опытных мастеров с использованием премиальной косметики.</p>
+            </div>
+            
+            <div class="services__grid">
+                <div class="service-card">
+                    <div class="service-card__icon">✂️</div>
+                    <h3 class="service-card__title">Стрижки</h3>
+                    <p class="service-card__text">Женские, мужские и детские стрижки любой сложности. Моделирование по вашему типу лица.</p>
+                    <span class="service-card__price">от 35 BYN</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">🎨</div>
+                    <h3 class="service-card__title">Окрашивание</h3>
+                    <p class="service-card__text">Мелирование, тонирование, блондирование, сложное окрашивание и колористика.</p>
+                    <span class="service-card__price">от 60 BYN</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">💆‍♀️</div>
+                    <h3 class="service-card__title">Укладки</h3>
+                    <p class="service-card__text">Вечерние, свадебные и повседневные укладки. Выпрямление, локоны, прически.</p>
+                    <span class="service-card__price">от 30 BYN</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">💅</div>
+                    <h3 class="service-card__title">Маникюр</h3>
+                    <p class="service-card__text">Классический, аппаратный, комбинированный маникюр. Дизайн ногтей любой сложности.</p>
+                    <span class="service-card__price">от 25 BYN</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">🦶</div>
+                    <h3 class="service-card__title">Педикюр</h3>
+                    <p class="service-card__text">Медицинский и эстетический педикюр. Уход за кожей стоп и ногтями.</p>
+                    <span class="service-card__price">от 35 BYN</span>
+                </div>
+                
+                <div class="service-card service-card--highlight">
+                    <div class="service-card__icon">✨</div>
+                    <h3 class="service-card__title">Комплексный уход</h3>
+                    <p class="service-card__text">Волосы + маникюр + педикюр со скидкой 10%. Идеальный день красоты для вас.</p>
+                    <span class="service-card__price">от 120 BYN</span>
+                    <span class="service-card__badge">Популярное</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== МАСТЕРА ===== -->
+    <section class="masters" id="masters">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-header__subtitle">Наша команда</span>
+                <h2 class="section-header__title">Мастера Tati Studio</h2>
+                <p class="section-header__text">Каждый мастер — профессионал с большим опытом и любовью к своему делу.</p>
+            </div>
+            
+            <div class="masters__grid">
+                <div class="master-card" data-master-id="1">
+                    <div class="master-card__image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" alt="Татьяна" loading="lazy" />
+                    </div>
+                    <h3 class="master-card__name">Татьяна</h3>
+                    <span class="master-card__role">Стилист-колорист</span>
+                    <p class="master-card__text">Стаж 8 лет. Эксперт по сложному окрашиванию и колористике. Преподаватель академии.</p>
+                    <div class="master-card__rating">⭐ 4.9</div>
+                    <button class="btn btn--primary btn--small master-card__btn" data-master="Татьяна">Записаться к Татьяне</button>
+                </div>
+                
+                <div class="master-card" data-master-id="2">
+                    <div class="master-card__image">
+                        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" alt="Анна" loading="lazy" />
+                    </div>
+                    <h3 class="master-card__name">Анна</h3>
+                    <span class="master-card__role">Мастер маникюра</span>
+                    <p class="master-card__text">Стаж 6 лет. Специалист по наращиванию, дизайну и укреплению ногтей. Создает шедевры.</p>
+                    <div class="master-card__rating">⭐ 4.8</div>
+                    <button class="btn btn--primary btn--small master-card__btn" data-master="Анна">Записаться к Анне</button>
+                </div>
+                
+                <div class="master-card" data-master-id="3">
+                    <div class="master-card__image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" alt="Екатерина" loading="lazy" />
+                    </div>
+                    <h3 class="master-card__name">Екатерина</h3>
+                    <span class="master-card__role">Парикмахер-универсал</span>
+                    <p class="master-card__text">Стаж 10 лет. Мастер женских и мужских стрижек, укладок и причесок. Авторский подход.</p>
+                    <div class="master-card__rating">⭐ 4.9</div>
+                    <button class="btn btn--primary btn--small master-card__btn" data-master="Екатерина">Записаться к Екатерине</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ОТЗЫВЫ ===== -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-header__subtitle">Что говорят клиенты</span>
+                <h2 class="section-header__title">Отзывы о Tati Studio</h2>
+            </div>
+            
+            <div class="reviews__slider" id="reviewsSlider">
+                <div class="reviews__track" id="reviewsTrack">
+                    <div class="review-card">
+                        <div class="review-card__stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-card__text">«Лучший студия в городе! Татьяна сделала мне окрашивание, о котором я мечтала. Очень внимательный подход и комфортная атмосфера. Рекомендую всем!»</p>
+                        <div class="review-card__author">
+                            <span class="review-card__name">Марина</span>
+                            <span class="review-card__date">15 января 2026</span>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-card__stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-card__text">«Хожу к Анне на маникюр уже год. Всегда идеально, стойкость до 4 недель. Девушка настоящий художник! Еще и цена очень приятная.»</p>
+                        <div class="review-card__author">
+                            <span class="review-card__name">Ольга</span>
+                            <span class="review-card__date">10 января 2026</span>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-card__stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-card__text">«Перепробовала много студияов, но теперь только Tati Studio. Екатерина подобрала идеальную стрижку, которая мне действительно идет. Спасибо за преображение!»</p>
+                        <div class="review-card__author">
+                            <span class="review-card__name">Александра</span>
+                            <span class="review-card__date">5 января 2026</span>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-card__stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-card__text">«Очень красиво, стильно, уютно. Видно, что команда действительно любит свою работу. Обязательно приду снова!»</p>
+                        <div class="review-card__author">
+                            <span class="review-card__name">Дмитрий</span>
+                            <span class="review-card__date">28 декабря 2025</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reviews__controls">
+                    <button class="reviews__arrow reviews__arrow--prev" id="prevReview">‹</button>
+                    <div class="reviews__dots" id="reviewsDots"></div>
+                    <button class="reviews__arrow reviews__arrow--next" id="nextReview">›</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-header__subtitle">Свяжитесь с нами</span>
+                <h2 class="section-header__title">Контакты</h2>
+            </div>
+            
+            <div class="contacts__grid">
+                <div class="contacts__info">
+                    <div class="contact-item">
+                        <span class="contact-item__icon">📍</span>
+                        <div>
+                            <h4>Адрес</h4>
+                            <p>г. Минск, ул. Гурского, 44, корп. 3</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-item__icon">📞</span>
+                        <div>
+                            <h4>Телефон</h4>
+                            <a href="tel:+375291234567">+375 29 123-45-67</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-item__icon">🕐</span>
+                        <div>
+                            <h4>Режим работы</h4>
+                            <p>Пн–Пт: 09:00 – 21:00<br />Сб–Вс: 10:00 – 20:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-item__icon">📱</span>
+                        <div>
+                            <h4>Социальные сети</h4>
+                            <div class="social-links">
+                                <a href="#" aria-label="Instagram">📸</a>
+                                <a href="#" aria-label="Telegram">✈️</a>
+                                <a href="#" aria-label="WhatsApp">💬</a>
+                                <a href="#" aria-label="Viber">📲</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Карта (Google Maps / Яндекс) -->
+                <div class="contacts__map">
+                    <iframe
+                        src="https://yandex.by/map-widget/v1/-/CTgs5Fzf?z=15"
+                        width="100%" 
+                        height="350" 
+                        style="border:0; border-radius: 16px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        title="Tati Studio на Яндекс.Картах">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПОДВАЛ ===== -->
+    <footer class="footer">
+        <div class="container footer__container">
+            <a href="#" class="logo footer__logo">Tati<span>Studio</span></a>
+            <p class="footer__text">© 2026 Tati Studio. Все права защищены.</p>
+            <p class="footer__text footer__text--small">Сайт создан с ❤️ для вашей красоты</p>
+        </div>
+    </footer>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ДЛЯ ЗАПИСИ ===== -->
+    <div class="modal" id="bookingModal" aria-hidden="true">
+        <div class="modal__overlay" id="modalOverlay"></div>
+        <div class="modal__content">
+            <button class="modal__close" id="modalClose" aria-label="Закрыть">✕</button>
+            <div id="dikidiWidget"></div>
+            <div id="modalMessage" style="display: none; text-align: center; padding: 30px 0;">
+                <p style="font-size: 18px; color: #2d2d2d;">Запись в разработке...</p>
+                <p style="color: #777; margin-top: 10px;">Скоро здесь появится виджет Dikidi.<br />А пока позвоните нам по телефону <strong>+375 29 123-45-67</strong></p>
+                <button class="btn btn--primary" onclick="document.getElementById('bookingModal').classList.remove('active')" style="margin-top: 20px;">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ПОДКЛЮЧЕНИЕ JAVASCRIPT ===== -->
+    <script src="js/main.js"></script>
+</body>
+</html>
