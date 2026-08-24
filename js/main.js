@@ -1,8 +1,3 @@
-// ================================================================
-// TATI STUDIO - Лендинг
-// Вся интерактивность сайта
-// ================================================================
-
 document.addEventListener('DOMContentLoaded', () => {
     
     // ---------- БУРГЕР-МЕНЮ ----------
@@ -24,47 +19,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // ---------- МОДАЛЬНОЕ ОКНО ЗАПИСИ ----------
-    const modal = document.getElementById('bookingModal');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalClose = document.getElementById('modalClose');
-    const bookingBtns = document.querySelectorAll('#bookingBtn, #heroBookingBtn, .master-card__btn');
-    
-    function openModal() {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+    // ---------- МОДАЛЬНЫЕ ОКНА ----------
+    const modals = {
+        booking: document.getElementById('bookingModal'),
+        master: document.getElementById('bookingMasterModal')
+    };
+
+    // Функция открытия модалки
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     }
-    
-    function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+
+    // Функция закрытия модалки
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
-    
-    // Открытие модалки по кнопкам
-    bookingBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-            
-            // Если нажали на кнопку мастера — передаём имя
-            const masterName = btn.getAttribute('data-master');
-            if (masterName) {
-                console.log(`Запись к мастеру: ${masterName}`);
-                // Здесь можно динамически подставить выбор мастера в виджет Dikidi
-                // Например, через URL-параметр или вызов API
+
+    // Закрытие по крестику и overlay
+    document.querySelectorAll('.modal__close, .modal__overlay').forEach(el => {
+        el.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            if (modalId) {
+                closeModal(modalId);
             }
         });
     });
-    
-    // Закрытие модалки
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', closeModal);
-    
+
     // Закрытие по ESC
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeModal();
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal.active').forEach(modal => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         }
+    });
+
+    // ---------- ОБЩАЯ ЗАПИСЬ ----------
+    document.querySelectorAll('#bookingBtn, #heroBookingBtn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('bookingModal');
+        });
+    });
+
+    // ---------- ЗАПИСЬ К МАСТЕРУ ----------
+    document.querySelectorAll('.master-card__btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const masterName = this.closest('.master-card').getAttribute('data-master-name') || 'мастеру';
+            console.log(`Запись к ${masterName}`);
+            openModal('bookingMasterModal');
+        });
     });
     
     // ---------- СЛАЙДЕР ОТЗЫВОВ ----------
@@ -217,79 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Немного задерживаем появление для эффекта
     document.querySelectorAll('.service-card, .master-card, .review-card').forEach((el, i) => {
         el.style.transitionDelay = `${i * 0.08}s`;
-    });
-    
-    // ---------- ЗАПИСЬ ЧЕРЕЗ DIKIDI (ИНТЕГРАЦИЯ) ----------
-    // Функция для открытия виджета Dikidi с конкретным мастером
-    window.openDikidiBooking = function(masterName = null) {
-        // Базовый URL для виджета Dikidi
-        // Замените YOUR_DIKIDI_ID на ваш ID из личного кабинета Dikidi
-        const companyId = 'YOUR_DIKIDI_ID';
-        let widgetUrl = `https://dikidi.ru/#/online/${companyId}`;
-        
-        // Если передан мастер, добавляем параметр
-        if (masterName) {
-            // Способ 1: через параметр запроса (если поддерживается Dikidi)
-            // widgetUrl += `?master=${encodeURIComponent(masterName)}`;
-            
-            // Способ 2: запись в localStorage для последующего использования виджетом
-            localStorage.setItem('dikidi_selected_master', masterName);
-            console.log(`Выбран мастер: ${masterName}`);
-        }
-        
-        // Открываем в новом окне (или можно использовать iframe внутри модалки)
-        window.open(widgetUrl, '_blank');
-    };
-    
-    // Обработчики кнопок мастеров с интеграцией Dikidi
-    document.querySelectorAll('.master-card__btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            const masterName = this.getAttribute('data-master');
-            // Если не хотим открывать модалку, а сразу переходить к записи
-            // openDikidiBooking(masterName);
-            
-            // А пока открываем модалку с уведомлением
-            // (в реальной интеграции здесь будет вызов виджета Dikidi)
-            openModal();
-            
-            // Показываем сообщение о выборе мастера
-            const message = document.getElementById('modalMessage');
-            const widget = document.getElementById('dikidiWidget');
-            if (message) {
-                message.style.display = 'block';
-                message.innerHTML = `
-                    <p style="font-size: 18px; color: #2d2d2d;">
-                        🎯 Запись к <strong>${masterName}</strong>
-                    </p>
-                    <p style="color: #777; margin: 10px 0 20px;">
-                        Виджет Dikidi будет загружен здесь.<br />
-                        Пока позвоните нам: <strong>+375 29 123-45-67</strong>
-                    </p>
-                    <button class="btn btn--primary" onclick="document.getElementById('bookingModal').classList.remove('active')" style="margin-top: 10px;">
-                        Закрыть
-                    </button>
-                `;
-                if (widget) widget.style.display = 'none';
-            }
-        });
-    });
-    
-    // Восстанавливаем стандартное поведение для кнопок "Записаться"
-    document.querySelectorAll('#bookingBtn, #heroBookingBtn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Сброс сообщения, показываем виджет
-            const message = document.getElementById('modalMessage');
-            const widget = document.getElementById('dikidiWidget');
-            if (message) {
-                message.style.display = 'none';
-                message.innerHTML = `
-                    <p style="font-size: 18px; color: #2d2d2d;">Запись в разработке...</p>
-                    <p style="color: #777; margin-top: 10px;">Скоро здесь появится виджет Dikidi.<br />А пока позвоните нам по телефону <strong>+375 29 123-45-67</strong></p>
-                    <button class="btn btn--primary" onclick="document.getElementById('bookingModal').classList.remove('active')" style="margin-top: 20px;">Закрыть</button>
-                `;
-            }
-            if (widget) widget.style.display = 'block';
-        });
     });
     
     console.log('Tati Studio — лендинг загружен! 🚀');
