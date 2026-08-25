@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // ---------- БУРГЕР-МЕНЮ ----------
     const burger = document.getElementById('burger');
     const nav = document.getElementById('nav');
-    
+
     burger.addEventListener('click', () => {
         burger.classList.toggle('active');
         nav.classList.toggle('open');
         document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
     });
-    
+
     // Закрытие меню при клике на ссылку
     document.querySelectorAll('.nav__link').forEach(link => {
         link.addEventListener('click', () => {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = '';
         });
     });
-    
+
     // ---------- МОДАЛЬНЫЕ ОКНА ----------
     const modals = {
         booking: document.getElementById('bookingModal'),
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Закрытие по крестику и overlay
     document.querySelectorAll('.modal__close, .modal__overlay').forEach(el => {
-        el.addEventListener('click', function() {
+        el.addEventListener('click', function () {
             const modalId = this.getAttribute('data-modal');
             if (modalId) {
                 closeModal(modalId);
@@ -73,25 +73,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---------- ЗАПИСЬ К МАСТЕРУ ----------
     document.querySelectorAll('.master-card__btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
+        btn.addEventListener('click', function (e) {
             e.preventDefault();
             const masterName = this.closest('.master-card').getAttribute('data-master-name') || 'мастеру';
             console.log(`Запись к ${masterName}`);
             openModal('bookingMasterModal');
         });
     });
-    
+
     // ---------- СЛАЙДЕР ОТЗЫВОВ ----------
     const track = document.getElementById('reviewsTrack');
     const dotsContainer = document.getElementById('reviewsDots');
     const prevBtn = document.getElementById('prevReview');
     const nextBtn = document.getElementById('nextReview');
-    
+
     let currentSlide = 0;
     let slidesPerView = 2;
     let totalSlides = 0;
     let autoPlayInterval = null;
-    
+
     function initSlider() {
         // Определяем количество слайдов на экране
         if (window.innerWidth < 900) {
@@ -99,16 +99,16 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             slidesPerView = 2;
         }
-        
+
         const cards = track.querySelectorAll('.review-card');
         totalSlides = cards.length;
-        
+
         // Обновляем ширину карточек
         const cardWidth = 100 / slidesPerView;
         cards.forEach(card => {
             card.style.flex = `0 0 calc(${cardWidth}% - ${(slidesPerView - 1) * 12 / slidesPerView}px)`;
         });
-        
+
         // Создаем точки
         const dotsCount = Math.ceil(totalSlides / slidesPerView);
         dotsContainer.innerHTML = '';
@@ -119,57 +119,57 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.addEventListener('click', () => goToSlide(i));
             dotsContainer.appendChild(dot);
         }
-        
+
         goToSlide(0);
     }
-    
+
     function goToSlide(index) {
         const dots = dotsContainer.querySelectorAll('.reviews__dot');
         const maxSlide = Math.ceil(totalSlides / slidesPerView) - 1;
-        
+
         if (index < 0) index = maxSlide;
         if (index > maxSlide) index = 0;
-        
+
         currentSlide = index;
         const offset = -index * 100;
         track.style.transform = `translateX(${offset}%)`;
-        
+
         // Обновляем активные точки
         dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === index);
         });
     }
-    
+
     function nextSlide() {
         const maxSlide = Math.ceil(totalSlides / slidesPerView) - 1;
         goToSlide(currentSlide + 1 > maxSlide ? 0 : currentSlide + 1);
     }
-    
+
     function prevSlide() {
         const maxSlide = Math.ceil(totalSlides / slidesPerView) - 1;
         goToSlide(currentSlide - 1 < 0 ? maxSlide : currentSlide - 1);
     }
-    
+
     prevBtn.addEventListener('click', () => {
         prevSlide();
         resetAutoPlay();
     });
-    
+
     nextBtn.addEventListener('click', () => {
         nextSlide();
         resetAutoPlay();
     });
-    
+
     // Автопрокрутка слайдера
     function startAutoPlay() {
         if (autoPlayInterval) clearInterval(autoPlayInterval);
         autoPlayInterval = setInterval(nextSlide, 5000);
     }
-    
+
     function resetAutoPlay() {
         startAutoPlay();
     }
-    
+
     // Перезапуск при изменении размера окна
     let resizeTimeout;
     window.addEventListener('resize', () => {
@@ -179,23 +179,23 @@ document.addEventListener('DOMContentLoaded', () => {
             startAutoPlay();
         }, 300);
     });
-    
+
     // Инициализация слайдера
     initSlider();
     startAutoPlay();
-    
+
     // ---------- ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРНЫХ ССЫЛОК ----------
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             if (href === '#') return;
-            
+
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -203,14 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    
+
     // ---------- АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ----------
     const observerOptions = {
         root: null,
         rootMargin: '0px 0px -50px 0px',
         threshold: 0.1
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, observerOptions);
-    
+
     // Наблюдаем за карточками услуг, мастерами и отзывами
     document.querySelectorAll('.service-card, .master-card, .review-card').forEach(el => {
         el.style.opacity = '0';
@@ -227,11 +227,11 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
-    
+
     // Немного задерживаем появление для эффекта
     document.querySelectorAll('.service-card, .master-card, .review-card').forEach((el, i) => {
         el.style.transitionDelay = `${i * 0.08}s`;
     });
-    
+
     console.log('Tati Studio — лендинг загружен! 🚀');
 });
