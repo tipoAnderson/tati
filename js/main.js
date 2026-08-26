@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Обновляем ширину карточек
         const cardWidth = 100 / slidesPerView;
         cards.forEach(card => {
-            card.style.flex = `0 0 calc(${cardWidth}% - ${(slidesPerView - 1) * 12 / slidesPerView}px)`;
+            card.style.flex = `0 0 calc(${100 / slidesPerView}% - 24px)`;
         });
 
         // Создаем точки
@@ -131,14 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index > maxSlide) index = 0;
 
         currentSlide = index;
-        const offset = -index * 100;
-        track.style.transform = `translateX(${offset}%)`;
 
-        // Обновляем активные точки
+        // ширина одной карточки + gap
+        const card = track.querySelector('.review-card');
+        const cardWidth = card.offsetWidth;
+        const gap = 24; // как в CSS
+
+        const step = (cardWidth + gap) * slidesPerView;
+
+        const offset = -(step * index);
+
+        track.style.transform = `translateX(${offset}px)`;
+
         dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === index);
         });
     }
+
 
     function nextSlide() {
         const maxSlide = Math.ceil(totalSlides / slidesPerView) - 1;
@@ -183,6 +192,80 @@ document.addEventListener('DOMContentLoaded', () => {
     // Инициализация слайдера
     initSlider();
     startAutoPlay();
+
+    // ---------- СЛАЙДЕР УСЛУГ ----------
+    const servicesTrack = document.getElementById('servicesTrack');
+    const servicesDots = document.getElementById('servicesDots');
+    const prevService = document.getElementById('prevService');
+    const nextService = document.getElementById('nextService');
+
+    let servicesCurrent = 0;
+    let servicesPerView = 3;
+    let servicesTotal = 0;
+
+    function initServicesSlider() {
+        if (window.innerWidth < 600) {
+            servicesPerView = 1;
+        } else if (window.innerWidth < 1024) {
+            servicesPerView = 2;
+        } else {
+            servicesPerView = 3;
+        }
+
+        const cards = servicesTrack.querySelectorAll('.service-card');
+        servicesTotal = cards.length;
+
+        const dotsCount = Math.ceil(servicesTotal / servicesPerView);
+        servicesDots.innerHTML = '';
+
+        for (let i = 0; i < dotsCount; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('services_dot');
+            if (i === 0) dot.classList.add('services_dot-active');
+            dot.addEventListener('click', () => goServiceSlide(i));
+            servicesDots.appendChild(dot);
+        }
+
+        goServiceSlide(0);
+    }
+
+    function goServiceSlide(index) {
+        const dots = servicesDots.querySelectorAll('.services_dot');
+        const maxSlide = Math.ceil(servicesTotal / servicesPerView) - 1;
+
+        if (index < 0) index = maxSlide;
+        if (index > maxSlide) index = 0;
+
+        servicesCurrent = index;
+
+        const card = servicesTrack.querySelector('.service-card');
+        const cardWidth = card.offsetWidth;
+        const gap = 24;
+
+        const step = (cardWidth + gap) * servicesPerView;
+        const offset = -(step * index);
+
+        servicesTrack.style.transform = `translateX(${offset}px)`;
+
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('services_dot-active', i === index);
+        });
+    }
+
+    prevService.addEventListener('click', () => {
+        goServiceSlide(servicesCurrent - 1);
+    });
+
+    nextService.addEventListener('click', () => {
+        goServiceSlide(servicesCurrent + 1);
+    });
+
+    window.addEventListener('resize', () => {
+        initServicesSlider();
+    });
+
+    initServicesSlider();
+
 
     // ---------- ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРНЫХ ССЫЛОК ----------
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

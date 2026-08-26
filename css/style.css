@@ -8,18 +8,18 @@
     --color-gray: #777;
     --color-light-gray: #f8f6f3;
     --color-white: #ffffff;
-    
+
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
-    
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-    --shadow-md: 0 8px 30px rgba(0,0,0,0.10);
-    --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
-    
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+
     --radius: 16px;
     --radius-sm: 8px;
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     --container: 1140px;
     --gutter: 20px;
 }
@@ -160,10 +160,10 @@ ul {
     right: 0;
     z-index: 1000;
     padding: 16px 0;
-    background: rgba(255,255,255,0.85);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     transition: var(--transition);
 }
 
@@ -350,12 +350,20 @@ ul {
     padding: 80px 0;
 }
 
-.services__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+/* Слайдер */
+.services_slider {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px 0;
 }
 
+.services_track {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.5s ease;
+}
+
+/* Карточки услуг — стилизация сохранена полностью */
 .service-card {
     padding: 32px 24px;
     background: var(--color-white);
@@ -364,6 +372,9 @@ ul {
     transition: var(--transition);
     text-align: center;
     position: relative;
+
+    /* ширина для слайдера */
+    flex: 0 0 calc(33.333% - 16px);
 }
 
 .service-card:hover {
@@ -372,38 +383,38 @@ ul {
     border-color: var(--color-primary-light);
 }
 
-.service-card__icon {
+.service-card_icon {
     font-size: 40px;
     margin-bottom: 16px;
 }
 
-.service-card__title {
+.service-card_title {
     font-family: var(--font-heading);
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-.service-card__text {
+.service-card_text {
     color: var(--color-dark);
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 16px;
 }
 
-.service-card__price {
+.service-card_price {
     display: inline-block;
     font-weight: 700;
     font-size: 18px;
     color: var(--color-primary);
 }
 
-.service-card--highlight {
+.service-card-highlight {
     background: var(--color-light-gray);
     border-color: var(--color-primary);
 }
 
-.service-card__badge {
+.service-card_badge {
     position: absolute;
     top: -10px;
     right: 16px;
@@ -416,6 +427,65 @@ ul {
     border-radius: 50px;
     letter-spacing: 0.5px;
 }
+
+/* Контролы */
+.services_controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.services_arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.services_arrow-prev {}
+
+.services_arrow-next {}
+
+.services_dots {
+    display: flex;
+    gap: 8px;
+}
+
+.services_dot {
+    width: 10px;
+    height: 10px;
+    background: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.services_dot-active {
+    background: var(--color-primary);
+    width: 28px;
+    border-radius: 5px;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .service-card {
+        flex: 0 0 calc(50% - 12px);
+    }
+}
+
+@media (max-width: 600px) {
+    .service-card {
+        flex: 0 0 100%;
+    }
+}
+
 
 /* ---------- МАСТЕРА ---------- */
 .masters {
@@ -663,7 +733,7 @@ ul {
 .footer {
     padding: 32px 0;
     background: var(--color-black);
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .footer__container {
@@ -714,7 +784,7 @@ ul {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
 }
 
@@ -756,11 +826,11 @@ ul {
     .hero__title {
         font-size: 40px;
     }
-    
+
     .services__grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .masters__grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -771,28 +841,28 @@ ul {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    
+
     .hero__text {
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     .hero__actions {
         justify-content: center;
     }
-    
+
     .hero__stats {
         justify-content: center;
     }
-    
+
     .hero__image img {
         height: 320px;
     }
-    
+
     .contacts__grid {
         grid-template-columns: 1fr;
     }
-    
+
     .review-card {
         flex: 0 0 calc(100% - 12px);
     }
@@ -812,52 +882,52 @@ ul {
         border-left: 1px solid #eee;
         overflow-y: auto;
     }
-    
+
     .nav.open {
         right: 0;
     }
-    
+
     .nav__list {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
     }
-    
+
     .nav__link {
         font-size: 18px;
     }
-    
+
     .burger {
         display: flex;
     }
-    
+
     .header__btn {
         display: none;
     }
-    
+
     .hero {
         padding: 100px 0 60px;
         min-height: auto;
     }
-    
+
     .hero__title {
         font-size: 32px;
     }
-    
+
     .services__grid {
         grid-template-columns: 1fr 1fr;
     }
-    
+
     .masters__grid {
         grid-template-columns: 1fr;
         max-width: 360px;
         margin: 0 auto;
     }
-    
+
     .section-header__title {
         font-size: 28px;
     }
-    
+
     .footer__container {
         flex-direction: column;
         text-align: center;
@@ -870,18 +940,18 @@ ul {
         max-width: 360px;
         margin: 0 auto;
     }
-    
+
     .hero__actions {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .hero__stats {
         flex-direction: column;
         gap: 12px;
         align-items: center;
     }
-    
+
     .modal__content {
         padding: 24px;
     }
