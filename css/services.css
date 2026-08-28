@@ -1,0 +1,136 @@
+/* ---------- УСЛУГИ ---------- */
+.services {
+    padding: 80px 0;
+}
+
+/* Слайдер */
+.services_slider {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px 0;
+}
+
+.services_track {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.5s ease;
+}
+
+/* Карточки услуг — стилизация сохранена полностью */
+.service-card {
+    padding: 32px 24px;
+    background: var(--color-white);
+    border-radius: var(--radius);
+    border: 1px solid #eee;
+    transition: var(--transition);
+    text-align: center;
+    position: relative;
+
+    /* ширина для слайдера */
+    flex: 0 0 calc(33.333% - 16px);
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light);
+}
+
+.service-card__icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.service-card__title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.service-card__text {
+    color: var(--color-dark);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.service-card__price {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-primary);
+}
+
+.service-card-highlight {
+    background: var(--color-light-gray);
+    border-color: var(--color-primary);
+}
+
+.service-card__badge {
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+}
+
+/* Контролы */
+.services_controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.services_arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.services_dots {
+    display: flex;
+    gap: 8px;
+}
+
+.services_dot {
+    width: 10px;
+    height: 10px;
+    background: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.services_dot-active {
+    background: var(--color-primary);
+    width: 28px;
+    border-radius: 5px;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .service-card {
+        flex: 0 0 calc(50% - 12px);
+    }
+}
+
+@media (max-width: 600px) {
+    .service-card {
+        flex: 0 0 100%;
+    }
+}
