@@ -6,6 +6,7 @@ const nextService = document.getElementById('nextService');
 let servicesCurrent = 0;
 let servicesPerView = 3;
 let servicesTotal = 0;
+let servicesAutoPlayInterval = null;
 
 function initServicesSlider() {
     if (window.innerWidth < 600) {
@@ -56,16 +57,31 @@ function goServiceSlide(index) {
     });
 }
 
+function startServicesAutoPlay() {
+    if (servicesAutoPlayInterval) clearInterval(servicesAutoPlayInterval);
+    servicesAutoPlayInterval = setInterval(() => {
+        goServiceSlide(servicesCurrent + 1);
+    }, 5000);
+}
+
+function resetServicesAutoPlay() {
+    startServicesAutoPlay();
+}
+
 prevService.addEventListener('click', () => {
     goServiceSlide(servicesCurrent - 1);
+    resetServicesAutoPlay();
 });
 
 nextService.addEventListener('click', () => {
     goServiceSlide(servicesCurrent + 1);
+    resetServicesAutoPlay();
 });
 
 window.addEventListener('resize', () => {
     initServicesSlider();
+    startServicesAutoPlay();
 });
 
 initServicesSlider();
+startServicesAutoPlay();
