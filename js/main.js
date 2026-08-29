@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.getElementById('nav');
 
     burger.addEventListener('click', () => {
-        burger.classList.toggle('active');
-        nav.classList.toggle('open');
-        document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+        const isOpen = nav.classList.toggle('open');
+        burger.classList.toggle('active', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
     // Закрытие меню при клике на ссылку
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             burger.classList.remove('active');
             nav.classList.remove('open');
+            document.body.classList.remove('nav-open');
             document.body.style.overflow = '';
         });
     });
@@ -64,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ---------- ОБЩАЯ ЗАПИСЬ ----------
-    document.querySelectorAll('#bookingBtn, #heroBookingBtn').forEach(btn => {
+    document.querySelectorAll('#bookingBtn, #heroBookingBtn, #floatingBookingBtn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             openModal('bookingModal');
