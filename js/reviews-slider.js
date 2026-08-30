@@ -7,7 +7,6 @@ let currentSlide = 0;
 let slidesPerView = 2;
 let totalSlides = 0;
 let autoPlayInterval = null;
-let swipeStartX = 0;
 
 function initSlider() {
 
@@ -80,23 +79,6 @@ prevBtn.addEventListener('click', () => {
 
 nextBtn.addEventListener('click', () => {
     nextSlide();
-    resetAutoPlay();
-});
-
-track.addEventListener('pointerdown', (event) => {
-    swipeStartX = event.clientX;
-});
-
-track.addEventListener('pointerup', (event) => {
-    const swipeDelta = event.clientX - swipeStartX;
-    if (Math.abs(swipeDelta) < 50) return;
-
-    if (swipeDelta < 0) {
-        nextSlide();
-    } else {
-        prevSlide();
-    }
-
     resetAutoPlay();
 });
 
