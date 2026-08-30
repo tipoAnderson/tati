@@ -2,14 +2,17 @@ const track = document.getElementById('reviewsTrack');
 const dotsContainer = document.getElementById('reviewsDots');
 const prevBtn = document.getElementById('prevReview');
 const nextBtn = document.getElementById('nextReview');
+const slider = document.getElementById('reviewsSlider');
 
 let currentSlide = 0;
 let slidesPerView = 2;
 let totalSlides = 0;
 let autoPlayInterval = null;
+let swipeStartX = 0;
+let swipeStartY = 0;
+let isDragging = false;
 
 function initSlider() {
-
     if (window.innerWidth < 900) {
         slidesPerView = 1;
     } else {
@@ -25,6 +28,7 @@ function initSlider() {
 
     const dotsCount = Math.ceil(totalSlides / slidesPerView);
     dotsContainer.innerHTML = '';
+
     for (let i = 0; i < dotsCount; i++) {
         const dot = document.createElement('span');
         dot.classList.add('reviews__dot');
@@ -45,13 +49,10 @@ function goToSlide(index) {
 
     currentSlide = index;
 
-    // ширина одной карточки + gap
     const card = track.querySelector('.review-card');
     const cardWidth = card.offsetWidth;
-    const gap = 24; // как в CSS
-
+    const gap = 24;
     const step = (cardWidth + gap) * slidesPerView;
-
     const offset = -(step * index);
 
     track.style.transform = `translateX(${offset}px)`;
@@ -60,7 +61,6 @@ function goToSlide(index) {
         dot.classList.toggle('active', i === index);
     });
 }
-
 
 function nextSlide() {
     const maxSlide = Math.ceil(totalSlides / slidesPerView) - 1;
@@ -80,6 +80,42 @@ prevBtn.addEventListener('click', () => {
 nextBtn.addEventListener('click', () => {
     nextSlide();
     resetAutoPlay();
+});
+
+slider.addEventListener('pointerdown', (event) => {
+    swipeStartX = event.clientX;
+    swipeStartY = event.clientY;
+    isDragging = true;
+    slider.classList.add('is-dragging');
+});
+
+slider.addEventListener('pointerup', (event) => {
+    if (!isDragging) return;
+    isDragging = false;
+    slider.classList.remove('is-dragging');
+
+    const deltaX = event.clientX - swipeStartX;
+    const deltaY = event.clientY - swipeStartY;
+
+    if (Math.abs(deltaX) < 50 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+    if (deltaX < 0) {
+        nextSlide();
+    } else {
+        prevSlide();
+    }
+
+    resetAutoPlay();
+});
+
+slider.addEventListener('pointercancel', () => {
+    isDragging = false;
+    slider.classList.remove('is-dragging');
+});
+
+slider.addEventListener('pointerleave', () => {
+    isDragging = false;
+    slider.classList.remove('is-dragging');
 });
 
 function startAutoPlay() {

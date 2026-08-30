@@ -5,6 +5,13 @@
 .reviews__slider {
     position: relative;
     overflow: hidden;
+    touch-action: pan-y;
+    user-select: none;
+    cursor: grab;
+}
+
+.reviews__slider.is-dragging {
+    cursor: grabbing;
 }
 
 .reviews__track {
