@@ -7,6 +7,7 @@ let servicesCurrent = 0;
 let servicesPerView = 3;
 let servicesTotal = 0;
 let servicesAutoPlayInterval = null;
+let servicesSwipeStartX = 0;
 
 function initServicesSlider() {
     if (window.innerWidth < 600) {
@@ -75,6 +76,23 @@ prevService.addEventListener('click', () => {
 
 nextService.addEventListener('click', () => {
     goServiceSlide(servicesCurrent + 1);
+    resetServicesAutoPlay();
+});
+
+servicesTrack.addEventListener('pointerdown', (event) => {
+    servicesSwipeStartX = event.clientX;
+});
+
+servicesTrack.addEventListener('pointerup', (event) => {
+    const swipeDelta = event.clientX - servicesSwipeStartX;
+    if (Math.abs(swipeDelta) < 50) return;
+
+    if (swipeDelta < 0) {
+        goServiceSlide(servicesCurrent + 1);
+    } else {
+        goServiceSlide(servicesCurrent - 1);
+    }
+
     resetServicesAutoPlay();
 });
 
