@@ -13,9 +13,9 @@ let servicesSwipeStartY = 0;
 let isServicesDragging = false;
 
 function initServicesSlider() {
-    if (window.innerWidth < 600) {
+    if (window.innerWidth <= 600) {
         servicesPerView = 1;
-    } else if (window.innerWidth < 1024) {
+    } else if (window.innerWidth <= 1024) {
         servicesPerView = 2;
     } else {
         servicesPerView = 3;
