@@ -35,7 +35,7 @@ function initServicesSlider() {
         servicesDots.appendChild(dot);
     }
 
-    goServiceSlide(0);
+    goServiceSlide(servicesCurrent);
 }
 
 function goServiceSlide(index) {

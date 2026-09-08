@@ -37,7 +37,7 @@ function initSlider() {
         dotsContainer.appendChild(dot);
     }
 
-    goToSlide(0);
+    goToSlide(currentSlide);
 }
 
 function goToSlide(index) {
